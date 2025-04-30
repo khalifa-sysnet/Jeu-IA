@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="icon" href="images/gardien.png" type="image/x-icon" />
+    <title>Presentation des personnages</title>
+</head>
+
+<body>
+
+    <div id="video-container">
+        <video autoplay="" muted="muted" loop="" id="background-video">
+            <source src="video/acceuil.mp4" type="video/mp4" />
+        </video>
+    </div>
+
+    <header>
+        <nav>
+            <a href="index.html">
+                <img src="images/acceuil.png" alt="Logo CYU" width="60" />
+            </a>
+            <ol>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="concept.html">Concept</a></li>
+                <li><a class="active" href="presentation.html">Presentation des personnages</a></li>
+                <li><a href="description.html">Description des notions</a></li>
+                <li><a href="profil.html">Profil des Etudiants</a></li>
+                <li><a href="conclusion.html">Conclusion</a></li>
+            </ol>
+        </nav>
+    </header>
+
+    <main class="presentation">
+        <h1>Presentation des personnages</h1>
+        <div class="explication">Cette page est dédiée à l'explication des personnages.</div>
+
+        <section>
+            <h2 id="intrus">Description des intrus</h2>
+            <p>Sur ce projet, il y a deux personnages, commençons par la présentation des intrus. Le principe est
+                simple, les intrus doivent essayer de fuir les gardiens qui les recherches. L'algorithme initial
+                de déplacement des intrus consiste en un mouvement aléatoire sur la grille. Cela offre une
+                représentation simple de l'incertitude des mouvements d'intrus lorsqu'ils ne sont pas détectés par le
+                gardien. Cependant, pour ajouter un niveau de complexité, nous avons évolué vers un modèle où les intrus
+                ajustent leur mouvement en fonction de la position du gardien.
+
+                Dans cette seconde phase, les intrus adoptent une approche plus stratégique. Si le gardien est à
+                proximité, les intrus cherchent à s'éloigner pour minimiser les chances d'être capturés.</p>
+        </section>
+        <figure>
+            <img src="images/voleur.gif" alt="Carte" width="200" />
+            <figcaption>Intrus</figcaption>
+        </figure>
+
+        <section>
+            <h2 id="gardien">Description des gardiens</h2>
+            <p>Le gardien joue un rôle crucial dans la simulation. Lorsque des intrus sont
+                détectés dans le champ de vision du gardien, un algorithme de recherche du chemin le plus court est
+                déclenché. Cette recherche tient compte des différents types d'obstacles pour déterminer le chemin
+                optimal tout en évitant les entraves.
+
+                Le gardien est capable de suivre un intrus repéré, en prenant note de la position d'autres intrus s'ils
+                entrent dans son champ de vision pendant la poursuite. Cela ajoute une dimension stratégique, car le
+                gardien élabore des plans pour capturer plusieurs intrus de manière efficace.
+
+                L'équilibre entre la détection des intrus, le calcul du chemin optimal, et la coordination avec d'autres
+                gardiens s'avère être un défi fascinant. Ces aspects sont au cœur du développement de l'intelligence
+                artificielle du gardien pour assurer des performances optimales dans la capture des intrus.</p>
+        </section>
+        <figure>
+            <img src="images/gardien.gif" alt="Carte" width="200" />
+            <figcaption>Gardien</figcaption>
+        </figure>
+    </main>
+
+    <footer>
+        <div class="footer-div">2024 Yuksel Sinan, Mebarki Khalifa, Fwala Yvon L2-ID</div>
+        <a href="https://mycy.cyu.fr/" target="_blank">
+            <img src="images/logo_cyu.png" alt="Logo CYU" width="100" />
+        </a>
+    </footer>
+
+</body>
+
+</html>

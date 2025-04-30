@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="icon" href="images/gardien.png" type="image/x-icon" />
+    <title>Conclusion</title>
+</head>
+
+<body>
+
+    <div id="video-container">
+        <video autoplay="" muted="muted" loop="" id="background-video">
+            <source src="video/acceuil.mp4" type="video/mp4" />
+        </video>
+    </div>
+
+    <header>
+        <nav>
+            <a href="index.html">
+                <img src="images/acceuil.png" alt="Logo CYU" width="60" />
+            </a>
+            <ol>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="concept.html">Concept</a></li>
+                <li><a href="presentation.html">Presentation des personnages</a></li>
+                <li><a href="description.html">Description des notions</a></li>
+                <li><a href="profil.html">Profil des Etudiants</a></li>
+                <li><a class="active" href="conclusion.html">Conclusion</a></li>
+            </ol>
+        </nav>
+    </header>
+
+    <main class="presentation">
+        <h1>Conclusion Projet et Contrainte</h1>
+        <section>
+            <h2 id="conclusion">Conclusion</h2>
+            <p>Ce projet, nous permettra de mettre en œuvre nos compétences en <strong>Java.</strong> Le but
+                du projet étant de créer une simulation. Le projet de simulation de jeu avec gardiens, intrus, et
+                obstacles est une exploration fascinante des concepts fondamentaux de la modélisation de comportements
+                intelligents dans un environnement dynamique. À travers les différentes phases de développement, nous
+                avons mis en œuvre des mécanismes complexes de déplacement, de détection et de coordination, contribuant
+                ainsi à la création d'une expérience de jeu immersive et stratégique.
+            </p>
+        </section>
+        <section>
+            <h2 id="projet">Projet de realisation</h2>
+            <p>Nous voulions créer une représentation robuste de la grille, avec une structure de données bien
+                conçue pour gérer les entités statiques et dynamiques. Les classes et structures mises en place
+                permetteront une extensibilité aisée du projet, offrant la possibilité d'ajouter de nouveaux éléments ou
+                de modifier des comportements existants sans compromettre la stabilité du système.
+
+                L'implémentation des déplacements évoluera d'un modèle de mouvement aléatoire des intrus vers un modèle
+                plus programmé où les intrus réagissent de manière stratégique à la position du gardien. De même,
+                le gardien a été développée pour calculer efficacement des chemins optimaux tout en coordonnant ses
+                actions avec d'autres gardiens, si présents. En conclusion, ce projet a permis d'explorer et de mettre
+                en œuvre des concepts clés liés à la simulation de jeux avec intelligence artificielle. Il ouvre la voie
+                à des développements futurs passionnants dans le domaine de la modélisation de comportements complexes
+                dans des environnements interactifs.Ce projet n'est donc qu'une étape initiale dans un voyage
+                continu d'exploration et d'innovation. Les leçons tirées et les compétences acquises grâce à ce travail
+                jetteront les bases de développements futurs plus ambitieux et variés. La simulation de jeu avec
+                gardiens, intrus, et obstacles est un domaine riche en potentiel, et nous sommes impatients d'explorer
+                davantage ces possibilités passionnantes.
+            </p>
+        </section>
+        <section>
+            <h2 id="contrainte">Contrainte</h2>
+            <p>Les contraintes du projet se diversifie autour de plusieurs aspects pour garantir la
+                réalisation d'une simulation complexe et immersive, nous avions dressé une liste selon les
+                informations actuelle :
+                Gestion des Obstacles : Nous devons développer une logique pour la gestion des
+                trois types d'obstacles (arbres, eau, murs), intégrant leurs propriétés spécifiques et impact
+                sur les déplacements des gardiens et des intrus.Déplacements des Gardiens : La planification des
+                déplacements des gardiens doit
+                prendre en compte les obstacles, le champ de vision, ainsi que les stratégies de capture
+                des intrus. Les gardiens doivent être capables de se déplacer efficacement dans la grille
+                tout en évitant les obstacles.
+                Déplacements des Intrus : Pour les intrus, la contrainte réside dans l'implication
+                d'une évolution progressive du mouvement aléatoire initial vers des déplacements
+                stratégiques basés sur la position des gardiens, rendant leur évasion plus réaliste et
+                défiant.
+                Interaction Gardien-Intrus : L'interaction entre les gardiens et les intrus doit être
+                fluide et réaliste. Les gardiens doivent détecter les intrus dans leur champ de vision,
+                planifier des itinéraires pour les attraper, et modifier leurs comportements aux changements
+                dans le comportement des intrus.
+                Coordination entre Gardiens : La coordination entre plusieurs gardiens doit être
+                implémentée pour optimiser la capture des intrus, avec des stratégies de communication et
+                de mouvement concertées.
+                Évolution du Comportement des Intrus : Le passage des intrus d'un mouvement
+                aléatoire à des déplacements stratégiques en fonction de la position des gardiens doit être
+                implémenté de manière progressive et réaliste.
+                Niveaux de Difficulté Ajustables : Les contraintes incluent également la mise en
+                place de niveaux de difficulté paramétrables pour permettre une adaptation du projet à
+                différents niveaux de compétence et d'expérience de jeu selon les envies de l'utilisateur.
+
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-div">2024 Yuksel Sinan, Mebarki Khalifa, Fwala Yvon L2-ID</div>
+        <a href="https://mycy.cyu.fr/" target="_blank">
+            <img src="images/logo_cyu.png" alt="Logo CYU" width="100" />
+        </a>
+    </footer>
+
+</body>
+
+</html>

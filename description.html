@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="icon" href="images/gardien.png" type="image/x-icon" />
+    <title>Description</title>
+</head>
+
+<body>
+
+    <div id="video-container">
+        <video autoplay="" muted="muted" loop="" id="background-video">
+            <source src="video/acceuil.mp4" type="video/mp4" />
+        </video>
+    </div>
+
+    <header>
+        <nav>
+            <a href="index.html">
+                <img src="images/acceuil.png" alt="Logo CYU" width="60" />
+            </a>
+            <ol>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="concept.html">Concept</a></li>
+                <li><a href="presentation.html">Presentation des personnages</a></li>
+                <li><a class="active" href="description.html">Description des notions</a></li>
+                <li><a href="profil.html">Profil des Etudiants</a></li>
+                <li><a href="conclusion.html">Conclusion</a></li>
+            </ol>
+        </nav>
+    </header>
+
+    <main class="presentation">
+        <h1>Description des notions</h1>
+        <section>
+            <h2 id="intro">Description générale</h2>
+            <p>Le projet Gardien consiste à développer une simulation interactive avec un gardien, des
+                intrus et une map composé de différents objets telles que des arbres (peut se déplacer
+                mais pas de vision), de l'eau (possède une vision mais peut pas se déplacer) et des murs
+                (peut ni ne se déplacer ni avoir une vision). L'objectif principal est de programmer les
+                actions du gardien pour qu'il puisse patrouiller, détecter et capturer des intrus, en prenant
+                en compte la map, et les obstacles présents sur la grille. Les Périmètre du Projet sont :
+            </p>
+            <article>
+                <h3>Grille</h3>
+                <p>La grille est un tableau 2D représentant le terrain de jeu. Elle est composée
+                    de cases où se déplacent le gardien et les intrus. La taille de la grille est définie par N × N
+                    cases avec plusieurs obstacles (arbre, eau, mur).</p>
+            </article>
+            <article>
+                <h3>Personnages</h3>
+                <p>Le gardien et les intrus sont les principaux personnages. Avec
+                    différents caractéristiques (visions, vitesse)</p>
+            </article>
+            <article>
+                <h3>Gardien</h3>
+                <p>Le gardien est le personnages principale chargée de patrouiller, détecter
+                    les intrus et les attraper. Il a un champ de vision limité mais connaît la carte par cœur. Le
+                    gardien se déplace en évitant les obstacles et suit le chemin le plus rapide pour attraper les
+                    intrus détectés. Le gardien détecte les intrus dans son champ de vision. Il recherche des
+                    chemins vers les intrus en tenant compte des obstacles. En l'absence d'intrus, le gardien
+                    se promène aléatoirement. Les gardiens peuvent communiquer pour attraper les intrus plus
+                    efficacement</p>
+            </article>
+            <article>
+                <h3>Intrus</h3>
+                <p>Il existe deux types d'intrus : statiques et dynamiques. Les intrus statiques
+                    restent immobiles et peuvent être détectés par le gardien dans leur champ de vision, qui
+                    vas par la suite établir un chemin pour les attraper. Les intrus dynamiques se déplacent,
+                    initialement de manière aléatoire, mais peuvent évoluer en fonction de la position du
+                    gardien. Les intrus statiques sont détectés par le gardien dès qu'ils entrent dans son
+                    champ de vision.</p>
+            </article>
+            <article>
+                <h3>Déplacements</h3>
+                <p>Le gardien peut se déplacer au hasard ou suivre un chemin calculé
+                    pour capturer les intrus. Les intrus ont des mouvements aléatoires, puis modifie leur
+                    comportement pour éviter le gardien.</p>
+            </article>
+            <article>
+                <h3>Obstacles</h3>
+                <p> Il y a trois types d'obstacles : arbres, eau, et murs. Les arbres bloquent
+                    la vision mais n'empêchent pas de passer. L'eau empêche de passer mais ne bloque pas
+                    la vision. Tandis que les murs bloquent à la fois le passage et la vision.
+                </p>
+            </article>
+            <article>
+                <h3>Coordination</h3>
+                <p> Le projet possède deux mode un mode avec un seule gardien et
+                    aussi un mode avec plusieurs gardiens. Les gardiens peuvent collaborer, la coordination
+                    entre les gardiens permet d'optimiser la capture des intrus.</p>
+            </article>
+            <article>
+                <h3>Dynamisme</h3>
+                <p>La simulation est dynamique, avec des intrus (également valable pour
+                    le gardien) qui réagissent aux actions du gardien et modifie leurs comportements.</p>
+            </article>
+            <article>
+                <h3>Personnalisation</h3>
+                <p> Paramètres ajustables tels que la taille de la grille, les densités
+                    d'obstacles, le nombre d'intrus, etc.</p>
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-div">2024 Yuksel Sinan, Mebarki Khalifa, Fwala Yvon L2-ID</div>
+        <a href="https://mycy.cyu.fr/" target="_blank">
+            <img src="images/logo_cyu.png" alt="Logo CYU" width="100" />
+        </a>
+    </footer>
+
+</body>
+
+</html>
