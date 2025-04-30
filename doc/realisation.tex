@@ -1,0 +1,180 @@
+\newpage
+\section{Conception et réalisation du projet}
+\label{sec:impl}
+
+\subsection{Architecture globale du logiciel}
+
+
+%\begin{figure}
+%\centering
+%\includegraphics[width=3.5cm, height=2cm]{images/programmer.png}
+%\caption{Un programmeur occupé}
+%\label{fig:modele}
+%\end{figure}
+
+
+\subsection{Conception des classes de données}
+
+\paragraph{}Notre projet ce présente en différents package.
+
+\subsubsection{Map}
+
+\paragraph{}Ce package va nous servir à initialiser et utiliser notre map ainsi que les éléments qui s'y trouve. Nous y aurons les classes suivantes:
+
+\paragraph{Block :} La classe a des méthodes pour obtenir la ligne et la colonne du bloc, ainsi que pour savoir si le bloc est de l'eau, un arbre, un rocher ou simplement de l'herbe. Elle a également des méthodes pour savoir si le bloc est au sommet, en bas, à gauche, à droite ou sur le bord de la carte pour délimiter le périmètre et y mettre des murs.,
+
+\paragraph{Grille :} La classe Map est une classe qui représente une carte de jeu en utilisant des blocs, chacun étant un objet Block. Cette carte peut être créée en spécifiant un nombre de lignes et de colonnes. Les blocs sont stockés dans un tableau (une liste de liste de block).
+La classe fournit des méthodes utiles pour vérifier les propriétés des blocs. Par exemple, isWall() permet de déterminer si un bloc est un mur ou non en vérifiant s'il est sur un bord de la carte. Les méthodes isWater(), isTree() et isRock() renvoient true si le bloc est respectivement de l'eau, un arbre ou un rocher. La méthode isFloor() renvoie true si le bloc est une surface de jeu normale, c'est-à-dire s'il n'est pas un mur, de l'eau, un arbre ou un rocher.
+La méthode getBlockPercentage() calcule le pourcentage de blocs qui ne sont pas une surface de jeu normale. Elle parcourt tous les blocs de la carte et compte ceux qui ne sont pas une surface de jeu normale. La valeur renvoyée est un double arrondi à deux décimales.
+
+\paragraph{Tree :} Cette classe représente un arbre dans la carte du jeu. C'est un obstacle. Elle a un attribut "position" qui est un objet Block et qui représente la position de l'arbre sur la carte. La classe a un constructeur pour initialiser l'attribut "position" et deux méthodes pour accéder à cet attribut : "getPosition" pour obtenir la position de l'arbre et "setPosition" pour définir la position de l'arbre.
+
+\paragraph{Rock :} Cette classe représente un rocher dans la carte du jeu. C'est un obstacle. Elle a un attribut "position" qui est un objet Block et qui représente la position de l'arbre sur la carte. La classe a un constructeur pour initialiser l'attribut "position" et deux méthodes pour accéder à cet attribut : "getPosition" pour obtenir la position de l'arbre et "setPosition" pour définir la position de l'arbre.
+
+\paragraph{Wall :} Cette classe représente un mur dans la carte du jeu. C'est un obstacle. Elle a un attribut "position" qui est un objet Block et qui représente la position de l'arbre sur la carte. La classe a un constructeur pour initialiser l'attribut "position" et deux méthodes pour accéder à cet attribut : "getPosition" pour obtenir la position de l'arbre et "setPosition" pour définir la position de l'arbre.
+
+\paragraph{Water :} Cette classe représente de l'eau dans la carte du jeu. C'est un obstacle. Elle a un attribut "position" qui est un objet Block et qui représente la position de l'arbre sur la carte. La classe a un constructeur pour initialiser l'attribut "position" et deux méthodes pour accéder à cet attribut : "getPosition" pour obtenir la position de l'arbre et "setPosition" pour définir la position de l'arbre.
+
+\paragraph{}
+
+\subsubsection{Mobile}
+
+\paragraph{}
+
+\paragraph{Gardien :} La classe Gardien étend la classe MobileElement. Elle prend une instance de la classe Block et une instance de la classe Map comme paramètres pour son constructeur. Elle a également une variable "etatPoursuite" de type booléen, afin de differencier l'etat normal de l'etat de poursuite (notament pour son mode de déplacement).
+
+\paragraph{Intru :} étend aussi de la classe MobileElement. Elle possède aussi un constructeur prenant en paramètres un objet Block et un objet Map.
+
+\paragraph{Mobile Element :} La classe MobileElement est une classe abstraite qui représente un élément mobile dans le jeu. Elle possède une position représentée par un objet de la classe Block. Elle a également une méthode getZone qui prend en entrée un objet de la classe Gardien ou de la classe Intru, ainsi qu'une carte (Map), et retourne une liste de blocs représentant la zone de vision de l'élément mobile. La méthode calcule cette zone en parcourant tous les blocs de la carte et en ajoutant ceux qui se trouvent dans le rayon de vision de l'élément mobile. Les blocs qui sont ajoutés doivent être soit des sols (isFloor()), soit de l'eau (isWater()), afin qu'ils ne bloquent pas la vision de l'élément mobile.
+Vous l'aurez compris, les 2 classes filles cette classe abstraite sont les classes Gardien et Intru.
+
+\paragraph{}
+
+\subsubsection{Images}
+
+\paragraph{}
+
+\paragraph{} C'est ici que nous rangerons nos images : arbre, eau, gardien, gardien-poursuite, herbe, intru, mur et roche.
+
+\subsection{Conception des traitements (processus)}
+
+\paragraph{}
+
+\subsubsection{Process }
+
+\paragraph{} Ce package va réunir toutes les classes et les méthodes qui nous permettrons d'initialiser et de faire tourner la simulation.
+
+\paragraph{InitSimulation :} Cette classe contient des méthodes statiques pour initialiser la simulation.
+La méthode "buildMap()" retourne une carte du jeu initialisée avec des obstacles tels que les murs, les arbres, les rochers et les zones de sol. Elle utilise la classe "Map" du package et les variables de configuration de la simulation pour générer les blocs.
+La méthode "buildInitMobile(Map map)" retourne un "MobileElementManager" initialisé avec des gardiens et des intrus. Elle utilise la méthode "initGardien(Map map, MobileElementManager manager)" et "initIntru(Map map, MobileElementManager manager)" pour ajouter des instances de "Gardien" et "Intru" à la liste des éléments mobiles.
+Les méthodes "initGardien(Map map, MobileElementManager manager)" et "initIntru(Map map, MobileElementManager manager)" initialisent un nombre spécifié de gardiens et d'intrus à des positions aléatoires sur la carte. Elles utilisent la méthode "getRandomNumber(int min, int max)" pour obtenir des nombres aléatoires.
+
+\paragraph{MobileElementManager :} La classe gère le déplacement des gardiens et intrus dans la simulation.  La classe contient des méthodes pour déplacer les éléments vers le haut, le bas, la gauche ou la droite sur la map, ainsi que des méthodes pour les déplacer aléatoirement. La classe garde également une trace du nombre d'intrus attrapés et de la scoreBoard.
+La classe prend une map dans son constructeur et deux de gardien et d'intru.
+La classe a des méthodes pour déplacer chaque type d'élément mobile (Gardien et Intru) vers le haut, le bas, la gauche ou la droite. Chaque méthode de déplacement vérifie si la nouvelle position de l'élément mobile est une position valide sur la carte de jeu (c'est-à-dire si c'est un bloc d'arbre ou de sol), et si c'est le cas, met à jour la position de l'élément mobile en conséquence.
+La classe a également une méthode RandomMoveGardiens qui déplace aléatoirement gardien sur la carte de jeu, idem pour les intrus.
+Dans l'ensemble, la classe MobileElementManager est responsable de la gestion du mouvement des éléments mobiles dans le jeu et de la gestion des informations pertinentes telles que le score et le nombre d'intrus attrapés.
+
+\paragraph{}
+
+\subsubsection{GUI} Ce package va faire en sorte de structurer et d'associer les éléments que nous manipulons afin qu'on puisse les voir sur une IHM graphique.
+
+\paragraph{}
+
+\paragraph{BackgroundPanel :} La classe BackgroundPanel étend JPanel et sert à afficher une image de fond dans une fenêtre Swing. Elle prend en entrée le chemin d'accès à l'image en tant que chaîne de caractères lors de sa création.
+Le constructeur de la classe utilise l'image spécifiée pour définir la taille préférée de la zone de dessin, puis stocke l'image en tant que variable d'instance pour une utilisation ultérieure.
+La méthode paintComponent() est Override pour dessiner l'image de fond en utilisant la méthode drawImage() de l'objet Graphics. L'image commence à ce dessinée aux coordonnées (0,0) pour remplir toute la zone de dessin.
+
+\paragraph{ConfigurerFrame :} Cette classe créee une interface utilisateur graphique pour un panneau de configuration. Ce panneau de configuration permet à l'utilisateur de configurer les paramètres d'un jeu de simulation. L'utilisateur peut entrer le nombre de lignes, de colonnes, d'intrus, de gardes, la taille de la vision, le temps de spawn, le temps de communication, la chance de bloc d'eau, la chance de bloc d'arbre et la chance de bloc de roche.
+L'utilisateur peut entrer les valeurs en utilisant des champs de texte, puis cliquer sur le bouton "Confirmer choix" pour confirmer les choix. Les valeurs entrées par l'utilisateur sont stockées dans la classe GameConfiguration en tant que variables statiques. La classe est utilisée pour stocker et récupérer les valeurs des paramètres pour le jeu.
+Le code crée un JFrame et ajoute plusieurs JPanels en utilisant le gestionnaire BorderLayout. Le premier JPanel contient le titre du panneau de configuration. Le deuxième JPanel contient une GridLayout de 10 lignes et 2 colonnes. Chaque ligne a un JLabel et un JTextField, représentant les étiquettes et les champs d'entrée pour les paramètres de configuration. Le troisième JPanel contient un JButton pour confirmer les choix de l'utilisateur.
+
+\paragraph{GameDisplay :} La classe GameDisplay hérite de JPanel et est responsable de l'affichage du jeu. Elle prend en entrée  la map et un objet MobileElementManager qui sont utilisés pour récupérer les informations sur les éléments mobiles du jeu (donc les gardiens et les intrus). La méthode paintComponent est utilisée pour dessiner les éléments graphiques du jeu, y compris les Gardiens et les Intrus. Si un Gardien est en état de poursuite, il est dessiné différemment des autres Gardiens. La méthode paintVision est utilisée pour dessiner la vision de chaque Gardien et Intrus. Cette classe fournit également une méthode getManager qui renvoie l'objet MobileElementManager utilisé pour gérer les éléments mobiles du jeu.
+
+\paragraph{GameMenu :} La classe GameMenu crée une interface utilisateur graphique pour le menu principal de jeu de la simulation. Elle crée une fenêtre JFrame contenant un BackgroundPanel avec une image de fond, un titre centré, trois boutons de taille personnalisée avec des actions associées (Jouer, Configurer et Quitter), et un JPanel pour les boutons. Cette classe permet aux utilisateurs de choisir entre jouer à la simulation, configurer les paramètres du jeu ou quitter le programme. La classe utilise des gestionnaires de mise en page pour organiser les composants et rendre l'interface utilisateur conviviale et facile à utiliser !
+
+\paragraph{GUISec :} La classe GUISec est une classe qui hérite de la classe JFrame et implémente l'interface Runnable. Elle est utilisée pour créer une interface graphique pour un jeu.
+La classe contient un certain nombre de composants graphiques, tels que des JPanel, des boutons, un tableau de bord et une carte, qui sont ajoutés à la fenêtre principale.
+La méthode init() est utilisée pour initialiser les composants graphiques et les ajouter à la fenêtre principale.
+La méthode run() est utilisée pour exécuter la boucle de jeu en continu (de manière iteratif), en appelant les méthodes nextRound() et repaint() de l'objet MobileElementManager et de l'objet GameDisplay, respectivement.
+L'interface ActionListener est utilisée pour écouter les événements des boutons "Ajouter un intru" et "Quitter" et déclencher les actions appropriées lorsqu'ils sont cliqués.
+
+\paragraph{MainGUI :} La classe MainGUI hérite de JFrame et implémente l'interface Runnable. Elle crée une fenêtre graphique avec une zone de jeu et un champ de texte. La zone de jeu est initialisée avec une carte et les éléments mobiles. La fenêtre peut être redimensionnée et contient un gestionnaire d'éléments mobiles. La classe utilise un thread pour mettre à jour les éléments mobiles à intervalles réguliers et redessiner la zone de jeu.
+
+\paragraph{Paint Strategy :} Cette classe permet de dessiner la carte et les éléments du jeu.
+La méthode paintMap permet de dessiner la carte. Elle prend en paramètre un objet de la classe Map et un objet de la classe Graphics qui sera utilisé pour dessiner la carte. Elle parcourt tous les blocs de la carte et dessine l'image correspondant à chaque bloc en fonction de son type (mur, eau, arbre, rocher, herbe).
+La méthode paintGardien permet de dessiner le gardien. Elle prend en paramètre un objet de la classe Gardien et un objet de la classe Graphics qui sera utilisé pour dessiner le gardien. Elle récupère la position du gardien et dessine l'image du gardien à la position correspondante.
+La méthode paintGardienPoursuite permet de dessiner le gardien en mode poursuite. Elle prend en paramètre un objet de la classe Gardien et un objet de la classe Graphics qui sera utilisé pour dessiner le gardien. Elle récupère la position du gardien et dessine l'image du gardien en mode poursuite à la position correspondante.
+La méthode paintIntru permet de dessiner l'intru. Elle prend en paramètre un objet de la classe Intru et un objet de la classe Graphics qui sera utilisé pour dessiner l'intru. Elle récupère la position de l'intru et dessine l'image de l'intru à la position correspondante.
+Enfin, la méthode paintVision permet de dessiner la zone de vision du gardien. Elle prend en paramètre un objet de la classe Gardien, un objet de la classe Graphics qui sera utilisé pour dessiner la zone de vision, et un objet de la classe Map. Elle récupère la zone de vision du gardien, calcule une transparence pour l'image de la zone de vision, et dessine un rectangle semi-transparent représentant la zone de vision autour du gardien.
+
+\paragraph{Scoreboard :} Cette classe est pour un tableau de bord graphique qui affiche diverses statistiques de jeu, telles que le nombre d'intrus attrapés, le nombre de gardiens, le nombre d'intrus, le pourcentage d'obstacles et le temps. Il dispose également de méthodes pour mettre à jour et incrémenter les valeurs de ces statistiques.
+Le tableau de bord est implémenté sous forme de JPanel avec un GridBagLayout. Il comporte différents JLabel pour afficher les statistiques et un minuteur pour mettre à jour le temps chaque seconde.
+Le constructeur met en place le JPanel avec les JLabel et lance le Timer. La méthode startTimer() initialise l'heure de début et planifie une TimerTask pour mettre à jour l'heure chaque seconde. La méthode updateTime() met à jour le JLabel de temps en calculant la différence entre l'heure de début et l'heure actuelle.
+Les méthodes updateintrusCaughtCount(), updateintrusCount() et updateguardiensCount() mettent à jour les JLabel correspondants avec la valeur de compte donnée. La méthode setInitialCounts() définit les comptes initiaux pour le nombre d'intrus, de gardiens et d'intrus totaux, ainsi que le pourcentage d'obstacles. Les méthodes incrementintrusCount(), decrementintrusCount(), incrementguardiensCount(), decrementguardiensCount() et incrementintrusCaughtCount() incrémentent ou décrémentent les valeurs de compte correspondantes de 1. Enfin, les méthodes setintrusCount(), setguardiensCount() et set...() définissent les valeurs de compte correspondantes à la valeur de compte donnée.
+En somme, ce code fournit un tableau de bord graphique de base qui peut être utilisé pour afficher les statistiques de jeu et les mettre à jour pendant le jeu.
+
+\paragraph{Simulation Utility :} Cette classe est utilisée pour charger une image afin d'avoir un rendu visuel.
+
+\paragraph{}
+
+
+\subsubsection{Test }
+
+Le package Test est simplement utilisé pour lancer la simulation.
+
+\paragraph{}
+
+\paragraph{TestGame :} Cette classe contient une méthode main qui permettra de lancer la simulation. On va simplement instancier un GameMenu.
+
+\paragraph{}
+
+\subsection{Conception de l'IHM graphique}
+
+
+\subsubsection{Organisation des fenêtres}
+
+
+\paragraph{}L’organisation de l’IHM est une partie très important pour l’utilisateur. Plus l’IHM est simple et
+agréable, plus elle sera ergonomique, ce qui va permettre à l’utilisateur de réaliser ses tâches de façon
+efficace, avec un plaisir garantie. C’est pour cela qu’on a décidé de faire un menu princiapl assez simple avec
+que 3 possibilitées d’interaction. La première interaction permet a l’utilisateur d’arriver sur la page de déroulement de la simulation en ne choissisant donc pas les parametres de la partie. La seconde interaction permet aux utilisateurs
+de configurer sa simulation. Et la dernière interaction permet de
+quitter l’application.
+
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[scale=0.4]{images/bouttons.png}
+	\caption{Possibilitées de l'utilisateur }
+	\label{fig:Bouttons de redirection}
+\end{figure}
+
+
+
+
+\paragraph{}La seule fenêtre qui peut potentiellement être complexe à comprendre est celle contenant l'affichage de la simulation. C'est pourquoi je vais la décrire.
+
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[scale=0.4]{images/orga.png}
+	\caption{Organisation de la fenêtre de simulation}
+	\label{fig:Organisation des fenêtres}
+\end{figure}
+
+
+
+\subsubsection{Enchainement des fenêtres}
+
+
+\paragraph{}L'enchaînement des fenêtres se fait de la manière suivante : lors du lancement du jeu, on arrive sur la page d'accueil, aussi appelée menu principal, puis trois boutons nous sont proposés. Le premier permet de lancer directement la simulation et mène à la fenêtre de simulation. Le deuxième permet de configurer sa partie et mène à la fenêtre de configuration. Le troisième permet simplement de quitter le logiciel.
+
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[scale=0.4]{images/Userinterfacediagram1.png}
+	\caption{Enchainement des fenêtres}
+	\label{fig:Explication enchainement}
+\end{figure}
+

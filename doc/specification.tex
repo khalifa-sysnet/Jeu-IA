@@ -1,0 +1,216 @@
+\newpage
+\section{Spécification du projet}
+\label{sec:specification}
+
+\paragraph{} Nous avons présenté l'objectif du projet dans la section \ref{sec:introduction}. Dans cette section, nous présenterons la spécification de notre logiciel réalisé. Ceci correspond principalement au document de spécification du projet (cahier des charges).
+
+\subsection{Notions de base et contraintes du projet}
+\label{sec:spec1}
+
+\subsubsection{Fonctionnement général du logiciel}
+
+
+\paragraph{Simulation :}
+Tout d'abord, il est important de préciser que c'est une simulation et non un jeu. Cela signifie que l'utilisateur aura la possibilité de configurer la partie, mais une fois cela réalisé, il ne pourra plus interagir directement avec ce qu'il ce passera.
+
+\paragraph{Règle :}
+Nous verrons une map qui sera un parc entouré de mur, des gardien(s) ainsi que des intru(s) qui apparaitront aléatoirement dans la map.
+Il y aura aussi des obstacles (eaux, arbres et rochers) qui seront aussi placés de manière aléatoirement dans la map. Au début, les gardiens ainsi que les intrus ce déplaceronts aléatoirement dans la map. Lorsqu'un intru rentre dans le champ de vision d'un gardien, le gardien va poursuivre l'intru afin de l'attraper et l'intru va fuir afin de ne pas se faire attraper par les gardiens. Au bout d'un certain moment, les gardiens communiqueront entre eux afin de se concentrer sur un seul intru.
+
+
+\paragraph{Configuration :}
+L'utilisateur aura la possibilité de configurer plusieurs paramètres. Il aura la possibilité de choisir le taux d'occupation d'eaux, de rochers et d'arbres sur la map. Il pourra aussi choisir le nombre de gardien, ainsi que le nombre initiale d'intru.
+Il configurera aussi le temps entre les appartions automatiques d'intru ainsi que le rayon des champ de visions. Enfin, il pourra choisir à ça guise le temps entre les communications des gardiens
+
+\subsubsection{Notions et termonologies de base}
+
+\paragraph{ } 
+\paragraph{Objet } 
+Un objet est un élément présent dans une case. Ça peut être un obstacle (arbre, mur ou
+eau) ou un acteur (gardien ou intrus). Il peut y avoir un ou plusieurs objet(s) pour une seule case
+de la grille mais il peut aussi ne pas en avoir.
+
+\paragraph{Obstacle } 
+Dans sa définition fondamentale , un obstacle est un élément qui empêche ou gêne le
+passage. Dans ce projet , nous avons trois obstacles possibles qui sont :
+
+• Arbre : Empêche le gardien de voir au-delà de cet obstacle mais ne l'empêche pas de
+passer -> on peut donc avoir plusieurs objets sur une case ou se trouve un arbre mais rend
+obsolète le champ de vision du gardien.
+
+• Eau : Empêche le gardien de passer sur cette case mais ne l'empêchent pas de voir au-
+delà -> aucun autre objet ne peut être sur la même case que l’eau mais le champ de vision
+reste effectif.
+
+• Mur : Empêche le gardien à la fois de voir et de passer -> aucun autre objet ne peut être
+sur la même case qu’un mur et rend obsolète le champ de vision du gardien.
+
+Pour le nombre d'obstacles sur la map (carte), on donne la possibilité à l'utilisateur d’initialiser le
+pourcentage d'obstacles sur la map sinon ce sera généré automatiquement
+
+\paragraph{Grille} 
+La grille est l'élément principal et déterminant. Il permet de situer et structurer les gardiens,
+les intrus ainsi que les obstacles. Nous pourrons donner le nombre d'obstacles présents. Elle
+pourra aussi être générée aléatoirement. Elle sera sous la forme d’un carré N*N, où le N sera un
+1
+paramètre modélisé aléatoirement (ou non) avant le lancement de la partie et est modifiable par
+l’utilisateur si il en a la volonté. Informatiquement, la grille sera un graphique avec un axe x et un
+axe y où on ne prendra en compte que les entiers. Il pourra y avoir (ou non) un ou plusieurs
+élément(s) dans chaque coordonnées (case) du tableau/graphique.
+
+\paragraph{Case } 
+Une case est un point sur un graphique. Il aura une valeur en abscisse (x) et une valeur en
+ordonnée (y). Il y aura potentiellement un ou plusieurs objet(s) (obstacle et/ou acteur) dans chaque
+case. Il peut aussi ne pas en avoir, la case est dans ce cas vide. Dans cet exemple ci , la taille du
+case est 1x1.
+
+\paragraph{Déplacement d’un acteur} 
+Le déplacement est un changement de position, dans notre cas, changement de position
+d’une case à une case voisine de façon uniquement verticale ou horizontale (on exclura donc les
+déplacements en diagonales). Cela signifie donc un changement de coordonnée: on va
+ajouter/soustraire 1 au x ou au y. De ce fait, l’acteur qui aura été déplacé se trouvera sur de
+nouvelles coordonnées.
+
+Dans ce projet ci, le déplacement initiale de chaque acteur sera de une case par une case
+Il n’y aura que les acteurs qui pourront se déplacer. Ils auront quatres possibilités de
+déplacements: se déplacer à la case du haut, de bas, de gauche ou de droite, sauf en cas
+exceptionnel lors de la rencontre d’une bordure de map ou un obstacle infranchissable (eau ou
+mur). Dans ce cas là, les nouvelles possibilités de déplacement seront réduite: on va soustraire le
+nombre de direction possible initial (4) par le nombre de cases voisines contenant un obstacle
+infranchissable (bordure de map, mur, eau).
+
+\paragraph{Gardiens} 
+Un gardien est un objet graphique qui occupe un espace bien défini sur la grille (la map),
+ce dernier se déplace dans la grille et il va avoir pour mission de repérer les intrus, en respectant
+les règles déjà définies (Notion de déplacement d’un acteur) à propos de ses déplacements.
+Initialement, le gardien se déplace aléatoirement d’une case à une autre jusqu'à ce qu’un intrus
+rentre dans son champ de vision, il le poursuit en se déplaçant dans le chemin le plus court vers
+lui. Le gardien attrape l’intrus si et seulement s'ils se retrouvent sur la même case (case gardien =
+case intrus) sauf le cas où ils se croisent dans la case arbre (case arbre = case gardien = case
+intrus), car la vision sera coupé pour la gardien à cause de l’arbre. Les gardiens seront entre 1 et 5
+(paramètre modifiable par l'utilisateur). Si, au bout de 20 secondes (on le modifiera peut-être plus
+tard), le gardien n’a toujours pas attrapé l’intrus qu’il poursuit, il communiquera la position de cet
+intrus aux autres gardiens. S’il croise d'autres intrus pendant la course, il communique la position
+de ce nouvel intrus aux autres gardiens. La vitesse du gardien sera 1,2x plus grande que celle de
+l’intrus.
+
+\paragraph{Scoreboard :} 
+Une Scoreboard ou en français tableau des scores va résumer quelques informations
+pertinentes sur le déroulement de la simulation.
+
+Le tableau des scores sera à coté de la map (carte) qui représentera la simulation du jeu , il comportera les informations suivantes:
+
+• Le nombre d'intru attrapé.
+
+• Le nombre de gardiens effectif sur la carte
+
+• Le nombre d’intrus effectif sur la carte
+
+• Le pourcentage d'obstacle qu'occupe la map
+
+• Le temps sous forme de chronomètre
+
+
+\paragraph{Intru :} 
+Un intrus est un acteur. Initialement, il se déplace de manière aléatoire, jusqu’à ce qu’un
+gardien rentre dans son champ de vision. Si un gardien rentre dans son champ de vision, il va fuir
+le gardien: il va se déplacer aléatoirement sans la possibilité de se déplacer dans la direction du
+gardien. Par exemple: nous avons à la base 4 possibilité de déplacement pour chaque acteur qui
+sont haut,bas,gauche et droite, sauf en cas exceptionnel (bordure de map, mur...). Si le gardien
+apparaît à gauche de l’intrus, ces nouvelles possibilités de déplacements seront haut, bas ou
+droite (neutralisant donc le déplacement gauche).
+
+Toutes les 30 secondes, un intrus va apparaître sur une case aléatoire (excepté les cases
+contenant déjà un objet),
+
+\paragraph{Champs de vision :} 
+Le champ de vision est un espace où les acteurs peuvent voir. Ici, nous avons trouvé deux
+possibilité de modélisation:
+
+Une vision angulaire qui consiste, en prenant compte de la position des acteurs ainsi que
+de leurs orientations. Par exemple, si un gardien regarde vers le nord, son champ de vision
+s'oriente vers le nord dans un angle de 90°.
+
+Nous nous portons davantage sur la deuxième option qui serait de définir le champ de
+vision de gardien comme étant une “aura” (un cercle) effective de n case autour du gardien. Ici, ce
+sera une zone de rayon n case (qu’on choisira plus tard), où les acteurs auront accès aux
+informations présentes dans ce champ. Ils pourront donc réagir en conséquence.
+
+\paragraph{Temps (chronomètre) :} 
+Le chronomètre est un instrument de mesure du temps qu’on initialise à 0 min, 0 sec. Dans
+ce projet, l’unité la plus petite du temps mesuré est une seconde. Ainsi, le chronomètre à réaliser
+consiste à gérer trois valeurs essentielles : heure, minute et seconde. Toutes les 30 secondes
+(temps modifiable plus tard). La simulation s’arrêtera 5 minutes après le lancement ou lorsque le
+compteur d’intrus sera égal à 0.
+
+\paragraph{Coopération (Les gardiens s’aident mutuellement) :} 
+Lorsqu’un gardien poursuit un intrus pendant 20 secondes, il envoie un signal à tous les
+autres gardiens de la map. Si ces gardiens ne sont pas en pleine poursuite, l’intrus qui a été
+signalé sera considéré comme dans leurs champs de vision afin de connaître la position de l’intrus
+continuellement (pour éviter la contrainte d’avoir un signalement non pertinent, si l’on donnerait la
+case de l’intrus au moment du signalement, l’intrus ne serait plus présent sur cette case à l’arrivé
+des autres gardiens).
+
+\paragraph{"Chemin le plus court” :}  
+Il désigne le parcours le plus rapide pour que le gardien puisse atteindre l’intrus repéré, en
+se déplaçant sur le minimum de cases franchissables pour minimiser le temps afin de maximiser la
+chance de réussite pour le gardien. Cela sera réalisable en se basant sur l’algorithme Dijkstra, ce
+dernier est un algorithme qui permet de trouver le plus court des chemins possibles dans la map
+de jeu. Comme définition propre, Dijkstra utilise une approche de recherche en largeur pour
+trouver le plus court chemin entre un sommet de départ et tous les autres sommets dans un
+graphe pondéré. Il utilise une file de priorité pour stocker les sommets à explorer, et met à jour les
+distances en utilisant la distance actuelle plus le poids de l'arête, mais il sera adapté à notre cas
+d’utilisation.
+
+
+\subsubsection{Contraintes et limitations connues}
+
+\paragraph{} Nous avons été confrontés à une situation difficile lors de la réalisation de notre projet. Nous avions prévu d'être trois pour travailler ensemble, mais à cause de mésententes, nous nous sommes retrouvés à deux pour le mener à bien. Cette situation nous a beaucoup inquiétés et nous avons eu peur de ne pas pouvoir accomplir le projet comme prévu.
+
+Notre peur a été exacerbée par le fait que notre seule expérience jusque-là avait été le projet POO du semestre 3, qui avec le recul était relativement simple et presque ridicule en comparaison avec ce projet. Cela a ajouté à notre anxiété et à notre sentiment de ne pas être à la hauteur du défi qui nous attendait.
+
+Malgré cela, nous avons réussi à relever le défi et à mener à bien le projet à deux. Nous avons travaillé dur pour combler les lacunes que nous avions et nous avons finalement produit un projet dont nous sommes fiers. Cette expérience nous a appris que même dans les situations difficiles, avec du travail acharné et de la détermination, il est possible de surmonter les obstacles et de réussir. 
+
+\paragraph{} Nous aurions aimé offrir à l'utilisateur la possibilité de contrôler un gardien dans notre projet. Nous avons envisagé cette fonctionnalité comme une option qui aurait permis aux utilisateurs de sélectionner le gardien de leur choix en cliquant dessus et de le déplacer via les touches z q s d de leur clavier. Cependant, nous avons dû faire face à des contraintes de temps et qui ne nous ont pas permis de mettre en œuvre cette fonctionnalité. Malgré cela, nous avons tout de même réussi à créer un projet qui, nous l'espérons, sera apprécié par les utilisateurs et leur permettra de découvrir une simulation passionnante.
+
+
+\paragraph{Outils de développement :}
+\begin{enumerate}
+\item Java
+\item Eclipse
+\item Latex
+\end{enumerate}
+
+\subsection{Fonctionnalités attendues du projet}
+\label{sec:spec2}
+
+\paragraph{}
+
+\paragraph{ }
+L'utilisateur du logiciel doit pouvoir :
+
+• Paramétrer la taille de la map (Choisir le nombre de case en longueur et en hauteur).
+
+• Paramétrer le nombre de gardien
+
+• Paramétrer le pourcentage qu'occupe les arbres sur la map
+
+• Paramétrer le pourcentage qu'occupe l'eau sur la map
+
+• Paramétrer le pourcentage qu'occupe les rochers sur la map
+
+• Paramétrer le nombre d’intrus initiales.
+
+• Ajouter un intrus au cours de la partie via un bouton
+
+• Avoir la possibilité de mettre fin à la simulation à tout moment.
+
+• Consulter le scoreboard (nombre d'intrus attrapé etc.)
+
+• Distinguer les différents acteurs sur la map( via l’utilisation de code couleur ou autre...)
+
+• Distinguer les différents obstacles sur la map (via l’utilisation de code couleur ou autre ...)
+
+• Etre averti quand un intru entre dans le champ de vision d’un gardien.
+
+

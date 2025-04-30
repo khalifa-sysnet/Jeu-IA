@@ -1,0 +1,79 @@
+\newpage
+\section{Manuel utilisateur}
+\label{sec:manuel}
+
+\paragraph{}
+
+\noindent Cette section est dédiée au manuel utilisateur. C'est la seule section dans laquelle vous pouvez utiliser des captures d'écran de votre logiciel. 
+
+
+En cas de nécessité, vous pouvez scinder naturellement cette section en des sous-sections correspondantes à différentes aspects fonctionnels de votre logiciel. 
+
+\subsection{Menu principal}
+
+\paragraph{ }Au lancement du logiciel, c'est cette page qui nous est présentée. On peut retrouver trois boutons. En noir, le bouton "JOUER" va simplement lancer la simulation avec des paramètres par défaut. En jaune, le bouton "CONFIGURER" va permettre la redirection vers une fenêtre pour personnaliser sa simulation. En rouge, le bouton "QUITTER" permet la fermeture du logiciel.
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[scale=0.3]{images/principale4.png}
+	\caption{Fenêtre principale}
+	\label{fig:accueil}
+\end{figure}
+
+\subsection{Menu de configuration}
+
+\paragraph{ }Comme dit précédemment, si on interagit avec le bouton "CONFIGURER", on sera dirigé vers cette fenêtre, dans laquelle on peut modifier les paramètres de la simulation : taille de la carte, nombre de gardiens, nombre d'intrus, taille du champ de vision, temps avant apparition d'intrus, temps avant communication et pourcentage de chaque obstacle sur la carte.
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[scale=0.3]{images/configurer.png}
+	\caption{Fenêtre de configuration d'avant partie}
+	\label{fig:configuration}
+\end{figure}
+
+
+\paragraph{ }De plus, lors de la saisie des valeurs de chaque paramètre par l'utilisateur, si une valeur est invalide, un message s'affiche pour dire à l'utilisateur que sa valeur n'est pas valide. Une fois toutes les options paramétrées, l'utilisateur peut cliquer sur le bouton "CONFIRMER" pour valider ses choix et sur le bouton "LANCER" pour démarrer la simulation.
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[scale=0.3]{images/message.png}
+	\caption{Notification de valeur invalide}
+	\label{fig:message d'erreure}
+\end{figure}
+
+
+\subsection{Fenêtre de le simulation}
+
+\paragraph{ }Ceci est la fenêtre la plus importante du logiciel car celle-ci contient la simulation. Comme nous pouvons le voir, cette fenêtre est divisée en trois parties : une partie qui gère les boutons, une autre qui gère le scoreboard et la dernière qui gère le déroulement de la simulation.
+
+\paragraph{ }Dans cette fenêtre, deux boutons au niveau inférieur sont présents : le bouton "AJOUTER UN INTRU", comme son nom l'indique, permet l'ajout en temps réel d'un intrus sur la carte, et le bouton "QUITTER" permet à l'utilisateur de fermer le logiciel à tout moment.
+
+\paragraph{ }Le scoreboard, qui est encadré en rouge dans l'image ci-dessous, permet à l'utilisateur d'avoir des informations importantes sur la simulation en temps réel, comme le temps, le nombre de gardiens, le nombre d'intrus attrapés et le pourcentage d'obstacles sur la carte.
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[scale=0.3]{images/simulation2.png}
+	\caption{Fenêtre du déroulement de la simulation}
+	\label{fig:fenetre déroulement}
+\end{figure}
+
+\paragraph{ } Ici, nous pouvons voir plus précisément chaque information lors de la simulation :
+
+• Encadré en rouge : ce sont les intrus.
+
+• Encadré en bleu : ce sont les gardiens.
+
+• Les éclairs au-dessus de la tête des gardiens signifient qu'ils sont en état de communication. En effet, dans le cercle violet, on peut voir qu'un intrus est entré dans le champ de vision d'un gardien, ce qui a mené à un état de poursuite, puis à un état de communication entre les gardiens.
+
+• Les flèches noires montrent que les gardiens se déplacent vers l'intru qui est actuellement poursuivi par le gardien (action entourée par un cercle violet).
+
+• Les zones jaunes représentent les champs de vision des intrus, tandis que les zones blanches représentent les champs de vision des gardiens.
+
+• Lorsqu'un intru est attrapé, le nombre d'intrus attrapés dans la scoreboard augmente.
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[scale=0.3]{images/deroulement2.png}
+	\caption{Explication du déroulement de la simulation}
+	\label{fig:déroulement expliqué}
+\end{figure}
